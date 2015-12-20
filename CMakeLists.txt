@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 11)
 find_package(OpenCV REQUIRED)
 
 add_executable(dog_vision
-  dog_viz.cc)
+  dog_vision.cc)
 
 target_include_directories(dog_vision
   SYSTEM PRIVATE

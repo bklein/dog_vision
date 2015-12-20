@@ -1,6 +1,6 @@
 #include <algorithm>
-#include <numeric>
 #include <iostream>
+#include <numeric>
 
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
