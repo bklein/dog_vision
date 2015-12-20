@@ -11,20 +11,6 @@ using Buffer = std::vector<uint8_t>;
 
 int main(int argc, char** argv) {
 
-  //if (argc != 2) {
-  //  std::cerr << "provide image filename" << std::endl;
-  //  return 1;
-  //}
-
-  //const std::string filename(argv[1]);
-
-  //cv::Mat rgb = cv::imread(filename);
-
-  //if (rgb.empty()) {
-  //  std::cerr << "empty image";
-  //  return 1;
-  //}
-  //
   cv::VideoCapture cap(0);
   if (!cap.isOpened())
     return -1;
@@ -52,6 +38,11 @@ int main(int argc, char** argv) {
   channels.push_back(cv::Mat(rgb.size(), CV_8UC1, cv::Scalar(0)));
   channels.push_back(cv::Mat(rgb.size(), CV_8UC1, cv::Scalar(0)));
   channels.push_back(cv::Mat(rgb.size(), CV_8UC1, cv::Scalar(0)));
+
+  cv::namedWindow("original");
+  cv::moveWindow("original", 0, 0);
+  cv::namedWindow("dog");
+  cv::moveWindow("dog", rgb.cols, 0);
 
   while (true) {
 
@@ -103,19 +94,13 @@ int main(int argc, char** argv) {
       << " mem usage: " << getCurrentRSS() / (1024 * 1024) << "mb peak: " << getPeakRSS() / (1024*1024) << "mb"
       << std::endl;
 
-    cv::namedWindow("original");
-    cv::moveWindow("original", 0, 0);
     cv::resize(rgb, rgb, cv::Size(640,480));
     cv::imshow("original", rgb);
 
-    cv::namedWindow("dog");
-    cv::moveWindow("dog", rgb.cols, 0);
     cv::resize(dog, dog, cv::Size(640, 480));
     cv::imshow("dog", dog);
     if (cv::waitKey(1) >= 0) break;
 
-    //if (count > 90)
-    //  break;
   }
 
   return 0;
